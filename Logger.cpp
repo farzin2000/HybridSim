@@ -82,6 +82,25 @@ namespace HybridSim
 		num_mmio_dropped = 0;
 		num_mmio_remapped = 0;
 
+		//added params
+		
+		num_dram_read_acc = 0;
+		num_dram_write_acc = 0;
+		num_nvram_read_acc = 0;
+		num_nvram_write_acc = 0;
+
+		hit_rate_dram_read = 0;
+		hit_rate_dram_write = 0;
+		hit_rate_nvram_read = 0;
+		hit_rate_nvram_write = 0;
+
+		migration_from_dram_to_nvram = 0;
+		migration_from_nvram_to_dram = 0;
+
+		disk_swap_to_dram = 0;
+		disk_swap_to_nvram = 1234;
+
+
 
 		// Init the latency histogram.
 		for (uint64_t i = 0; i <= HISTOGRAM_MAX; i += HISTOGRAM_BIN)
@@ -786,6 +805,20 @@ namespace HybridSim
 		savefile << "\n\n";
 
 		savefile << "================================================================================\n\n";
+
+		savefile << "Printing added params\n\n";
+		savefile << "DRAM read accesses: " << num_dram_read_acc << "\n";
+		savefile << "DRAM write accesses: " << num_dram_write_acc << "\n";
+		savefile << "NVRAM read accesses: " << num_nvram_read_acc << "\n";
+		savefile << "NVRAM read accesses: " << num_nvram_read_acc << "\n";
+		savefile << "DRAM read accesses: " << num_dram_read_acc << "\n";
+		savefile << "Migration from DRAM to NVRAM: " << migration_from_dram_to_nvram << "\n";
+		savefile << "Migration from NVRAM to DRAM: " << migration_from_nvram_to_dram << "\n";
+		savefile << "Disk swap to DRAM: " << disk_swap_to_dram << "\n";
+		savefile << "Disk swap to NVRAM: " << disk_swap_to_nvram << "\n";
+
+		savefile << "================================================================================\n\n";
+
 		savefile << "Latency Histogram:\n\n";
 
 		savefile << "HISTOGRAM_BIN: " << HISTOGRAM_BIN << "\n";
