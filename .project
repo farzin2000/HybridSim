@@ -3,6 +3,8 @@
 	<name>HybridSim</name>
 	<comment></comment>
 	<projects>
+		<project>DRAMSim2</project>
+		<project>NVDIMMSim</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

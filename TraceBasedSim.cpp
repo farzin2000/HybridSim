@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
 	printf("hybridsim_test main()\n");
 	HybridSimTBS obj;
 
-	string tracefile = "traces/test.txt";
+	string tracefile = "traces/no_delay_test.txt";
 
 	if (argc == 3) {
 		use_stdin = false;
@@ -75,7 +75,7 @@ int main(int argc, char *argv[]) {
 	if (argc == 2) {
 		use_stdin = true;
 	} else {
-		cout << "Using default trace file (traces/test.txt)\n";
+		cout << "Using default trace file (traces/seq_page.txt)\n";
 	}
 
 	obj.run_trace(tracefile);
@@ -198,6 +198,7 @@ int HybridSimTBS::run_trace(string tracefile) {
 				//cout << "MAX_PENDING REACHED! Throttling the trace until pending is back below MIN_PENDING.\t\tcycle= " << trace_cycles << "\n";
 				throttle_count++;
 				while (pending > MIN_PENDING) {
+//					cerr<<"2";
 					mem->update();
 					throttle_cycles++;
 				}
@@ -209,7 +210,7 @@ int HybridSimTBS::run_trace(string tracefile) {
 		inFile.close();
 	}
 
-	if (use_stdin)
+/*	if (use_stdin)
 	{
 
 		char char_line[256];
@@ -283,7 +284,7 @@ int HybridSimTBS::run_trace(string tracefile) {
 		}
 
 
-	}
+	}*/
 
 	//mem->syncAll();
 
@@ -296,8 +297,9 @@ int HybridSimTBS::run_trace(string tracefile) {
 	// This is a hack for the moment to ensure that a final write completes.
 	// In the future, we need two callbacks to fix this.
 	// This is not counted towards the cycle counts for the run though.
-	for (int i = 0; i < 1000000; i++)
-		mem->update();
+	//TODO: TOF
+//	for (int i = 0; i < 1000000; i++)
+//		mem->update();
 
 	cout << "\n\n" << mem->currentClockCycle << ": completed " << complete
 			<< "\n\n";

@@ -29,6 +29,7 @@
 *********************************************************************************/
 
 #include "Logger.h"
+#include "HybridSystem.h"
 
 using namespace std;
 
@@ -805,7 +806,6 @@ namespace HybridSim
 		savefile << "\n\n";
 
 		savefile << "================================================================================\n\n";
-
 		savefile << "Printing added params\n\n";
 		savefile << "DRAM read accesses: " << num_dram_read_acc << "\n";
 		savefile << "DRAM write accesses: " << num_dram_write_acc << "\n";

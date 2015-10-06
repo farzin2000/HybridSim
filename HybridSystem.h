@@ -87,6 +87,16 @@ namespace HybridSim
 		// Helper functions
 		void ProcessTransaction(Transaction &trans);
 
+		// added function from Two LRU
+		int inDram(long addr);
+		int inPcm(long addr);
+		void addToDRAM(long page);
+		void addToPCM(long page);
+		void add(unsigned long long addr, char type);
+		void init(long, long, int);
+		void print();
+		void test(long long t);
+
 		void VictimRead(Pending p);
 		void VictimReadFinish(uint64_t addr, Pending p);
 
@@ -150,6 +160,25 @@ namespace HybridSim
 		NVDSim::NVDIMM *flash;
 
 		unordered_map<uint64_t, cache_line> cache;
+
+		// added params from two LRU:
+
+		typedef std::vector<long> ItemVector;
+		typedef ItemVector::iterator ItemIterator;
+		int pcmReadHit = 0, pcmWriteHit = 0, dramReadHit = 0, dramWriteHit = 0;
+		int pcmOnePerc = 0, pcmFivePerc = 0;
+		int rhit = 0, whit = 0, total = 0, migToDRAM = 0, migToPCM = 0;
+		int readthreshold = 100, writethreshold = 100;
+		long diskToPCM = 0, diskToDRAM = 0;
+		long dramsize, pcmsize;
+		int ratio_;
+		std::vector<long> dramCache;
+		std::vector<long> pcmCache;
+		std::vector<int> readcount;
+		std::vector<int> writecount;
+		long onepercdiff, fivepercdiff;
+
+		//
 
 		unordered_map<uint64_t, Pending> dram_pending;
 		unordered_map<uint64_t, Pending> flash_pending;
